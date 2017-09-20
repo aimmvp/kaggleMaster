@@ -17,8 +17,8 @@
      - degradation 문제를 deep residual learning 이라는 학습법으로 해결
  - https://github.com/kkweon/mnist-competition
 
-### Keras Layers
-* keras.layers.ZeroPadding2D
+## Keras Layers
+### keras.layers.ZeroPadding2D
 ```python
 keras.layers.convolutional.ZeroPadding2D(padding=(1, 1), data_format=None)
 ```
@@ -31,7 +31,7 @@ net = ZeroPadding2D((3, 3))(input_tensor)
  - If tuple of 2 ints: interpreted as two different symmetric padding values for height and width
 
 
-* keras.layers.Conv2D
+### keras.layers.Conv2D
 ```python
 keras.layers.convolutional.Conv2D(filters, kernel_size, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1), activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None)
 ```
@@ -42,7 +42,7 @@ net = Conv2D(64, (7, 7), strides=(2, 2), name="conv1")(net)
  - This layer creates a convolution kernel that is convolved with the layer input to produce a tensor of outputs. If use_bias is True, a bias vector is created and added to the outputs. Finally, if activation is not None, it is applied to the outputs as well.
  - When using this layer as the first layer in a model, provide the keyword argument input_shape (tuple of integers, does not include the sample axis), e.g. input_shape=(128, 128, 3) for 128x128 RGB pictures in data_format="channels_last".
 
-* keras.layers.normalization.BatchNormalization
+### keras.layers.normalization.BatchNormalization
 ```python
 keras.layers.normalization.BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001, center=True, scale=True, beta_initializer='zeros', gamma_initializer='ones', moving_mean_initializer='zeros', moving_variance_initializer='ones', beta_regularizer=None, gamma_regularizer=None, beta_constraint=None, gamma_constraint=None)
 ```
@@ -51,7 +51,7 @@ BatchNormalization(name="bn_conv1")(net)
 ```
 Normalize the activations of the previous layer at each batch, i.e. applies a transformation that maintains the mean activation close to 0 and the activation standard deviation close to 1.
 
-* keras.layers.advanced_activations.PReLU
+### keras.layers.advanced_activations.PReLU
 ```python
 keras.layers.advanced_activations.PReLU(alpha_initializer='zeros', alpha_regularizer=None, alpha_constraint=None, shared_axes=None)
 ```
@@ -62,7 +62,7 @@ keras.layers.advanced_activations.PReLU(alpha_initializer='zeros', alpha_regular
  - It follows: f(x) = alpha * x for x < 0, f(x) = x for x >= 0, where alpha is a learned array with the same shape as x.
  - ReLU를 일반화 한 것으로, 자신의 파라미터를 학습하여, 30Layers까지 수렴 할 수 있게 해준다.
 
-* keras.layers.pooling.MaxPooling2D
+### keras.layers.pooling.MaxPooling2D
 ```python
 keras.layers.pooling.MaxPooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None)
 ```
@@ -71,7 +71,7 @@ MaxPooling2D((3, 3), strides=(2, 2))(net)
 ```
  - Max pooling operation for spatial data.
  
-* add
+### add
 ```python
 add(inputs)
 ```
@@ -80,7 +80,7 @@ x = add([x, sc])
 ```
  - Functional interface to the Add layer.
 
-* keras.layers.pooling.AveragePooling2D
+### keras.layers.pooling.AveragePooling2D
 ```python
 keras.layers.pooling.AveragePooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None)
 ```
@@ -89,7 +89,7 @@ net = AveragePooling2D((2, 2))(net)
 ```
  - Average pooling operation for spatial data.
 
-* keras.layers.core.Flatten
+### keras.layers.core.Flatten
 ```python
 keras.layers.core.Flatten()
 ```
@@ -99,7 +99,7 @@ net = Flatten()(net)
   - Flattens the input. Does not affect the batch size.
 
 
-* keras.layers.core.Dense
+### keras.layers.core.Dense
 ```python
 keras.layers.core.Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None)
 ```
@@ -110,7 +110,7 @@ net = Dense(10, activation="softmax", name="softmax")(net)
  - Dense implements the operation: output = activation(dot(input, kernel) + bias) where activation is the element-wise activation function passed as the activation argument, kernel is a weights matrix created by the layer, and bias is a bias vector created by the layer (only applicable if use_bias is True).
 
 
-* keras.preprocession.image.ImageDataGenerator
+### keras.preprocession.image.ImageDataGenerator
 ```python
 keras.preprocessing.image.ImageDataGenerator(featurewise_center=False,
     samplewise_center=False,
@@ -127,3 +127,17 @@ train_gen = ImageDataGenerator(
     )
 ```
   - Generate batches of tensor image data with real-time data augmentation. The data will be looped over (in batches) indefinitely.
+
+### plot_model
+```python
+plot_model(model, to_file='model.png', show_shapes=False, show_layer_names=True, rankdir='TB')
+```
+```python
+plot_model(model, file_path, show_shapes=True, show_layer_names=False)
+```
+  - Converts a Keras model to dot format and save to a file.
+
+## argparse
+ - recommended command-line parsing module in the Python standard
+
+### ArgumentParser
