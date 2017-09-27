@@ -1,3 +1,0 @@
-bar.txt
-foo.txt
-test.md
