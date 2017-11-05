@@ -2,12 +2,15 @@
 * MongoDB 관련 참고 할 만한 사이트
  - https://velopert.com/mongodb-tutorial-list
  - https://docs.mongodb.com
+ - mongodump : https://docs.mongodb.com/manual/reference/program/mongodump/
+ - mongoexport : https://docs.mongodb.com/manual/reference/program/mongoexport/
 
 
 ### Mongo DB 설치
 https://docs.mongodb.com/
+(for Mac) https://treehouse.github.io/installation-guides/mac/mongo-mac.html
 
-### Data Restore ( 아래의 내용은 전부 command 라인에서 실행)
+### Data Restore
 1. Kaggle > Data 탭에서 train.bson 파일 다운로드(https://www.kaggle.com/c/cdiscount-image-classification-challenge/data)
 2. 저장위치로 이동
 ```
