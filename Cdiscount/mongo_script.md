@@ -1,4 +1,8 @@
 # BSON File Split 하기
+* MongoDB 관련 참고 할 만한 사이트
+ - https://velopert.com/mongodb-tutorial-list
+ - https://docs.mongodb.com
+
 
 ### Mongo DB 설치
 https://docs.mongodb.com/
@@ -35,7 +39,7 @@ switched to db train
 
 
 ### 데이터 잘라서 export하기
-1. id가 100000 보다 작은 데이터 dump 파일 생성
+1. id가 100000 보다 작은 데이터 dump 파일 생성(*mongoexport 는 JSON, CSV Type으로만 Export 가능*)
 ```
 $ mongodump --db train --collection train --query '{"_id":{$lt:100000}}'
 ```
