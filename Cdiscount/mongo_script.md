@@ -54,6 +54,14 @@ $ mongorestore --drop -d train_10_5 -c train train.bson
 # -c : collection 이름
 ```
 
+### Validation File 만들기
+1. id 기준으로 query > mongodump
+```
+$ mongodump --db train --collection train --query '{"_id":{$lt:200000, $gt:170000}}'
+2017-11-05T22:30:42.001+0900	writing train.train to
+2017-11-05T22:30:44.501+0900	done dumping train.train (12022 documents)
+```
+2. 
 https://stackoverflow.com/questions/6996999/how-can-i-use-mongodump-to-dump-out-records-matching-a-specific-date-range
 
 ## To-Do : random 대상 추출을 위한 query 작성법 학습 필요
