@@ -9,14 +9,14 @@
  - mongoexport : https://docs.mongodb.com/manual/reference/program/mongoexport/
 
 
-### Mongo DB 설치
+## Mongo DB 설치
 https://docs.mongodb.com/
 (for Mac) https://treehouse.github.io/installation-guides/mac/mongo-mac.html
 
-### 전체적인 처리 순서
+## 전체적인 처리 순서
 BSON 파일 다운로드 --> MongoDB 에 Restore --> Data 정보 확인 --> query를 이용한 mongodump 실행 --> 생성된 dump 파일 확인
 
-### Data Restore
+## Data Restore
 1. Kaggle > Data 탭에서 train.bson 파일 다운로드(https://www.kaggle.com/c/cdiscount-image-classification-challenge/data)
 2. bson 파일 저장위치로 이동
 ```
@@ -61,7 +61,7 @@ switched to db train
 ```
 
 
-### 데이터 잘라서 export하기
+## 데이터 잘라서 export하기
 1. id가 100000 보다 작은 데이터 dump 파일 생성(*mongoexport 는 JSON, CSV Type으로만 Export 가능*)
 ```
 $ mongodump --db train --collection train --query '{"_id":{$lt:100000}}'
@@ -74,7 +74,7 @@ $ mongorestore --drop -d train_10_5 -c train train.bson
 # -c : collection 이름
 ```
 
-### Validation File 만들기
+## Validation File 만들기
 참고 : https://www.tutorialspoint.com/mongodb/mongodb_query_document.htm
 * Training Data 이외에 Validation Data 생성을 위해 원본(train.bson)에서 _id 를 기준으로 200000 미만 170000 초과의 데이터 추출 : 총 12022 건 추출됨
 1. id 기준으로 query > mongodump
