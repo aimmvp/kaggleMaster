@@ -1,4 +1,34 @@
 # MongoDB 집계함수
 
 ## count
- -
+ - 컬렉션내문서의갯수조회
+ - example
+  > db.person.count()
+  > db.person.find({ name:"neo"}).count()
+
+## distinct
+ - 지정된키에대한중복제거
+ - 컬렉션과키를반드시지정해야함
+ - example
+  > db.runCommand({"distinct":"person", "key":"age"})
+  > db.phones.distinct('components.number', {components.number':{$lt:5500005}})
+  
+ ## group
+  - 지정된키에대한그룹핑
+  - sort/limit등을사용하기어려움
+  - reduce명령을직접지정가능
+  - example
+   > db.person.group({key:{age:1}, initial: {count:0}, $reduce: "function(obj, prev){prev.count++;}"})
+     [{"age":21, "count":2}]
+   > db.access.group({
+     "key":{ "path":1 }, // grouping key 
+     "initial": {"count":0}, // count value initializing
+     "reduce": function(curr, result) {result.count++;}
+   });
+ 
+
+# MongoDB Aggregation Framework 집계프레임워크
+## 특징
+- 콜렉션내의문서들을변환하고결합
+- 맴리듀스명령어사용보다쉬움
+- 
