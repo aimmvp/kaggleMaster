@@ -1,57 +1,53 @@
 import pymongo
 from pymongo import MongoClient
+import bson
 from bson.son import SON
 import datetime
+import io
+from keras.preprocessing.image import load_img
+import matplotlib.pyplot as plt
+import cv2
+import numpy as np
 '''
-0. 
-1. 카테고리 ID별로 카운트 정렬 --> collection countByCategory
-2. 
+https://velopert.com/560
+db.train.createIndex({category_id:1})
 '''
+
+# 1. Define DB, Collection
+# original DB : train
+# original Collection : train --> train_collection
+# count collection : count by category_id --> count_collection
+# made collection --> split_collection
 
 client = MongoClient()
 train_db = client.train
 train_collection = train_db.train
 count_collection = train_db.count_collection
 split_collection = train_db.split_collection
-# print(train_collection.count())
-# 7069896
+# create a index by category_id
+# train_collection.create_index("category_id")
+print(" Count of train_collection : ", train_collection.count())
+# for index in train_collection.list_indexes():
+#     print(index)
+#7069896
+
 
 '''
-0. make & export "count_collection"  
- : _id : category_id
-    count : count by category_id
-    sorting : count desc
-    
-group_pipe = [
+# 2. Make count_collection
+# order by count desc
+# output --> count_collection
+count_pipe = [
     {'$group': {'_id': '$category_id', 'count': {'$sum': 1}}},
     {'$sort': SON([('count', -1)])},
     {'$out': 'count_collection'}
 ]
- 
-count_collection.insert(list(train_collection.aggregate(group_pipe)))
-
-'''
-
-# category_list = count_collection.find({'count': 79640});
-# category_list = count_collection.find({'_id': 1000018296});
+print("Count START : ", datetime.datetime.now())
+print("Before Delete --> count_collection : ", count_collection.count())
+# count_collection.delete_many({})
+print("After Delete --> count_collection : ", count_collection.count())
+# count_collection.insert(list(train_collection.aggregate(count_pipe)))
+print("After Insert --> count_collection : ", count_collection.count())
+print("Count END : ", datetime.datetime.now())
 # 5270
-# category_list = count_collection.find({'count': {'$gt':100}});
-# 3475
-
-# 1. query category_list
-category_list = count_collection.find();
-
-print("######### CATEGORY COUNT : ", category_list.count())
-
-for category in category_list:
-    # print(type(category['_id']), ", ", type(category['count']))
-    print("START : ", datetime.datetime.now())
-    category_id = category['_id']
-    cnt = category['count']
-    if cnt > 100 :
-        cnt = 100
-    print("category_id :", category_id, "// cnt: ", cnt)
-    split_collection.insert(train_collection.find({'category_id': int(category_id)}).limit(cnt))
-    print("After Insert Count : ", split_collection.count())
-    print("END : ", datetime.datetime.now())
-    print("==============================")
+'''
+# 3.
